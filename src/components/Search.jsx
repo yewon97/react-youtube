@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ImSearch } from 'react-icons/im';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function Search() {
+  const { keyword } = useParams();
   const navigate = useNavigate();
   const [text, setText] = useState('');
   const handleSubmit = (e) => {
@@ -10,6 +11,8 @@ export default function Search() {
     navigate(`/videos/${text}`);
   };
   const handleChange = (e) => setText(e.target.value);
+
+  useEffect(() => setText(keyword || ''), [keyword]);
 
   return (
     <form
