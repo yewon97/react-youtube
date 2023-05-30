@@ -31,7 +31,7 @@ export default function Search() {
         aria-label="검색하기"
         className="h-10 w-12 flex justify-center items-center bg-zinc-600 rounded-e-full"
       >
-        <ImSearch className="text-black" />
+        <ImSearch className="text-white" />
       </button>
     </form>
   );
