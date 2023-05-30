@@ -17,18 +17,19 @@ export default function Search() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="m-auto justify-center flex relative w-1/2 max-w-5xl"
+      className="m-auto justify-center flex relative w-7/12 max-w-5xl"
     >
       <input
         type="text"
         value={text}
+				placeholder='Search...'
         onChange={handleChange}
-        className="border rounded-full w-full h-10 pl-5 pr-12 text-black"
+        className="border w-full h-10 px-5 text-black rounded-l-full outline-none"
       />
       <button
         type="button"
         aria-label="검색하기"
-        className="absolute top-1/2 transform -translate-y-1/2 right-0 h-10 w-12 flex justify-center items-center"
+        className="h-10 w-12 flex justify-center items-center bg-zinc-600 rounded-e-full"
       >
         <ImSearch className="text-black" />
       </button>

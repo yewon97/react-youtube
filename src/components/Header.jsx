@@ -8,8 +8,8 @@ export default function Header() {
     <header className="flex items-center justify-center h-20 border-b px-5">
       <h1>
         <Link href="/" className="flex items-center gap-x-3">
-          <BsYoutube className="text-default-red text-3xl" />
-          <span className="text-white text-2xl uppercase font-bold">
+          <BsYoutube className="text-brand text-4xl" />
+          <span className="text-white text-3xl uppercase font-bold">
             youtube
           </span>
         </Link>

@@ -52,10 +52,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-	background-color: #2a2a2a;
-	max-width: 1400px;
-	margin: 0 auto 40px;
-	color: #fff;
+	@apply flex flex-col items-center;
+	@apply bg-zinc-900 text-gray-500;
+}
+
+#root {
+	@apply w-full max-w-screen-2xl;
 }
 
 code {
