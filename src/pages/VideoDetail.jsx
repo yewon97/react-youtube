@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import VideoCard from '../components/VideoCard';
+import Header from '../components/Header';
 
 export default function VideoDetail() {
   const { videoId } = useParams();
   const [vidoes, setVidoes] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
-	const [video, setVideo] = useState();
+  const [video, setVideo] = useState();
+	const [mainVideo, setMainVideo] = useState({});
+	console.log('mainVideo: ', mainVideo);
 
   useEffect(() => {
     setLoading(true);
@@ -26,23 +29,38 @@ export default function VideoDetail() {
       console.log('🧹 깨끗하게 청소하는 일들을 합니다.');
     };
   }, []);
+  
+	useEffect(() => {
+    fetch(`/videos/channel.json`)
+      .then((res) => res.json())
+      .then((data) => {
+        setMainVideo(data);
+      })
+      .catch((e) => {
+        setError('에러가 발생했음!');
+      })
+    return () => {
+      console.log('🧹 깨끗하게 청소하는 일들을 합니다.');
+    };
+  }, []);
 
   return (
-    <div>
-      VideoDetail : {videoId}
-
-			<div>
-				{/* <VideoCard video={video} /> */}
-			</div>
-
-      {vidoes.items &&
-        vidoes.items.map((v) => {
-          return (
-            <div key={v.id.videoId}>
-              <VideoCard video={v} />
-            </div>
-          );
-        })}
-    </div>
+		<>
+			<Header />
+	
+	    <div className='flex justify-between'>
+				{mainVideo.items && <VideoCard video={mainVideo.items} classNm="" />}
+	      <ul  className="grid gap-4 grid-cols-1 max-w-md">
+	        {vidoes.items &&
+	          vidoes.items.map((v) => {
+	            return (
+	              <li key={v.id.videoId}>
+	                <VideoCard video={v} classNm="flex" />
+	              </li>
+	            );
+	          })}
+	      </ul>
+	    </div>
+		</>
   );
 }
