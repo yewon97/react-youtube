@@ -53,7 +53,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 	@apply flex flex-col items-center;
-	@apply bg-zinc-900 text-gray-500;
+	@apply bg-zinc-900 text-gray-200;
 }
 
 #root {

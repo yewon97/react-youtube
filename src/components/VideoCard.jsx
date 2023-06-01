@@ -13,14 +13,14 @@ export default function VideoCard({ video, classNm }) {
         className={classNm}
       >
         <img
+          className="w-full object-cover rounded-xl"
           src={thumbnails.medium.url}
           alt={title}
-          className="w-full object-cover rounded-xl"
         />
         <div className="pl-px pr-4">
           <h2 className="text-base/[20px] line-clamp-2 mt-4">{title}</h2>
-          <p className="mt-2 text-xs text-stone-400">{channelTitle}</p>
-          <p className="mt-1 text-xs text-stone-400">
+          <p className="mt-2 text-sm opacity-80">{channelTitle}</p>
+          <p className="mt-1 text-sm opacity-80">
             {formatAgo(publishedAt, 'ko')}
           </p>
         </div>
