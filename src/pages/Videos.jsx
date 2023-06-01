@@ -3,7 +3,7 @@ import VideoCard from '../components/VideoCard';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { search } from '../api/youtube';
-import FakeYoutube from '../api/fakeYoutube';
+import FakeYoutube from '../api/fakeYoutubeClient';
 import Youtube from '../api/youtube';
 import { useYoutubeApi } from '../context/YoutubeApiContext';
 
