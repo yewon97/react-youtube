@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import VideoCard from '../components/VideoCard';
-import { useQuery } from '@tanstack/react-query';
-import { useYoutubeApi } from '../context/YoutubeApiContext';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import ChannelInfo from '../components/ChannelInfo';
 import RelatedVideos from '../components/RelatedVideos';
 
@@ -13,10 +10,8 @@ export default function VideoDetail() {
 
   const {
     title,
-    thumbnails,
     channelTitle,
     channelId,
-    publishedAt,
     description,
   } = video.snippet;
   return (
@@ -29,6 +24,7 @@ export default function VideoDetail() {
           height="640"
           src={`http://www.youtube.com/embed/${video.id}`}
           frameBorder="0"
+					title={title}
         ></iframe>
         <div className="p-8">
           <h2 className="text-xl font-bold">{title}</h2>
