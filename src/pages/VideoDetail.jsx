@@ -1,63 +1,45 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import VideoCard from '../components/VideoCard';
+import { useQuery } from '@tanstack/react-query';
+import { useYoutubeApi } from '../context/YoutubeApiContext';
+import ChannelInfo from '../components/ChannelInfo';
+import RelatedVideos from '../components/RelatedVideos';
 
 export default function VideoDetail() {
-  const { videoId } = useParams();
-  const [vidoes, setVidoes] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
-  const [video, setVideo] = useState();
-  const [mainVideo, setMainVideo] = useState({});
-  console.log('mainVideo: ', mainVideo);
+  const {
+    state: { video },
+  } = useLocation();
+  console.log('state: ', video);
 
-  useEffect(() => {
-    setLoading(true);
-    setError(undefined);
-    fetch(`/videos/related.json`)
-      .then((res) => res.json())
-      .then((data) => {
-        setVidoes(data);
-        setLoading(false);
-      })
-      .catch((e) => {
-        setError('에러가 발생했음!');
-      })
-      .finally(() => setLoading(false));
-    return () => {
-      console.log('🧹 깨끗하게 청소하는 일들을 합니다.');
-    };
-  }, []);
-
-  useEffect(() => {
-    fetch(`/videos/channel.json`)
-      .then((res) => res.json())
-      .then((data) => {
-        setMainVideo(data);
-      })
-      .catch((e) => {
-        setError('에러가 발생했음!');
-      });
-    return () => {
-      console.log('🧹 깨끗하게 청소하는 일들을 합니다.');
-    };
-  }, []);
-
+  const {
+    title,
+    thumbnails,
+    channelTitle,
+    channelId,
+    publishedAt,
+    description,
+  } = video.snippet;
   return (
-    <>
-      <div className="flex justify-between">
-        {mainVideo.items && <VideoCard video={mainVideo.items} classNm="" />}
-        <ul className="grid gap-4 grid-cols-1 max-w-md">
-          {vidoes.items &&
-            vidoes.items.map((v) => {
-              return (
-                <li key={v.id.videoId}>
-                  <VideoCard video={v} classNm="flex" />
-                </li>
-              );
-            })}
-        </ul>
-      </div>
-    </>
+    <section>
+      <article>
+        <iframe
+          id="player"
+          type="text/html"
+          width="100%"
+          height="640"
+          src={`http://www.youtube.com/embed/${video.id}`}
+          frameBorder="0"
+        ></iframe>
+        <div>
+          <h2>{title}</h2>
+          <ChannelInfo id={channelId} name={channelTitle} />
+          <pre>{description}</pre>
+        </div>
+      </article>
+			<section>
+				<RelatedVideos id={video.id} />
+			</section>
+    </section>
   );
 }

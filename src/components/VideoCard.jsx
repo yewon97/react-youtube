@@ -2,15 +2,14 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { formatAgo } from '../util/date';
 
-export default function VideoCard({ video, classNm }) {
+export default function VideoCard({ video }) {
   const { title, thumbnails, channelTitle, publishedAt } = video.snippet;
 
   return (
     <li>
       <Link
-        to={`/videos/watch/${video.id.videoId}`}
-        relative="path"
-        className={classNm}
+        to={`/videos/watch/${video.id}`}
+				state={{ video }} 
       >
         <img
           className="w-full object-cover rounded-xl"
