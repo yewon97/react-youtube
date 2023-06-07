@@ -18,9 +18,9 @@ export default class Youtube {
       .search({
         params: {
           part: 'snippet',
+          relatedToVideoId: id,
           type: 'video',
           maxResults: 25,
-          relatedToVideoId: id,
         },
       })
       .then((res) =>
@@ -50,17 +50,6 @@ export default class Youtube {
           part: 'snippet',
           maxResults: 25,
           chart: 'mostPopular',
-        },
-      })
-      .then((res) => res.data.items);
-  }
-
-  async #videoDetail(id) {
-    return this.apiClient
-      .detail({
-        params: {
-          part: 'snippet',
-          id,
         },
       })
       .then((res) => res.data.items);
